@@ -9,7 +9,8 @@ function MapObject(
   yNegOffset,
   avaSteps,
   stepInterval,
-  type
+  type,
+  obst = true
 ) {
   // Image
   this.body = new Image();
@@ -27,6 +28,7 @@ function MapObject(
   this.left = this.x + this.xPosOffset;
   this.bottom = this.y + this.height - this.yNegOffset;
   this.top = this.y + this.yPosOffset;
+  this.obst = obst;
   // Animation config
   this.avaSteps = avaSteps;
   this.stepInterval = stepInterval;
@@ -64,7 +66,16 @@ function Fire(x, y) {
 }
 
 function Tree(x, y) {
+  MapObject.call(this, x, y, 181, 252, 45, 45, 200, 20, 1, 0.9, "tree");
+}
+function Tree(x, y) {
   MapObject.call(this, x, y, 181, 252, 45, 45, 200, 0, 1, 0.9, "tree");
+}
+function DeathTree1(x, y) {
+  MapObject.call(this, x, y, 132, 198, 22, 22, 150, 0, 1, 0.9, "deathtree1");
+}
+function DeathTree2(x, y) {
+  MapObject.call(this, x, y, 140, 211, 35, 35, 160, 0, 1, 0.9, "deathtree2");
 }
 
 function Tent(x, y) {
@@ -89,5 +100,8 @@ function LavaBubble2(x, y) {
   MapObject.call(this, x, y, 48, 48, 0, 0, 0, 0, 4, 15, "lavabubble2");
 }
 function Torch(x, y) {
-  MapObject.call(this, x, y, 48, 48, 0, 0, 0, 0, 2, 14, "torch");
+  MapObject.call(this, x, y, 48, 48, 0, 0, 0, 0, 2, 14, "torch", false);
+}
+function Flowers(x, y) {
+  MapObject.call(this, x, y, 72, 48, 0, 0, 0, 0, 1, 0.9, "flower", false);
 }

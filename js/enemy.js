@@ -67,7 +67,6 @@ function Enemy(
         return;
       }
       if (this.direction === 10) {
-        console.log("left");
         ctx.save();
         ctx.scale(-1, 1);
         ctx.drawImage(
@@ -99,22 +98,36 @@ function Enemy(
       this.fightStep++;
     } else if (this.death) {
       if (this.deathStep <= 0) {
-        console.log("DEAHT!!!!!!!!!!!!!!!!!!!!!!!");
         return;
       }
       ctx.save();
       ctx.globalAlpha = this.deathStep;
-      ctx.drawImage(
-        this.body,
-        this.width * Math.floor(this.fightStep / this.fightStepInterval),
-        this.height * this.direction,
-        this.width,
-        this.height,
-        this.x,
-        this.y,
-        this.width,
-        this.height
-      );
+      if (this.direction === 10) {
+        ctx.scale(-1, 1);
+        ctx.drawImage(
+          this.body,
+          this.width * Math.floor(this.fightStep / this.fightStepInterval),
+          this.height * 1,
+          this.width,
+          this.height,
+          -(this.x + 45),
+          this.y,
+          this.width,
+          this.height
+        );
+      } else {
+        ctx.drawImage(
+          this.body,
+          this.width * Math.floor(this.fightStep / this.fightStepInterval),
+          this.height * this.direction,
+          this.width,
+          this.height,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+      }
       ctx.restore();
       this.deathStep -= this.deathInterval;
     } else {
@@ -208,31 +221,31 @@ function Enemy(
 }
 
 function DeathKnight(x, y, direction = 8) {
-  Enemy.call(this, x, y, 126, 126, 20, 15, direction, 2, 32, 5, 6, 50, 50, "deathknight");
+  Enemy.call(this, x, y, 126, 126, 20, 15, direction, 2, 32, 5, 6, 150, 50, "deathknight");
 }
 
 function Skeleton(x, y, direction = 8) {
-  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 32, 3, 6, 30, 30, "skeleton");
+  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 64, 3, 6, 30, 30, "skeleton");
 }
 
 function SkeletonArmor(x, y, direction = 8) {
-  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 32, 3, 6, 25, 30, "skeleton2");
+  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 54, 3, 6, 25, 30, "skeleton2");
 }
 
 function SkeletonBoss(x, y, direction = 8) {
-  Enemy.call(this, x, y, 192, 192, 20, 15, direction, 4, 16, 6, 6, 50, 50, "boss");
+  Enemy.call(this, x, y, 192, 192, 20, 15, direction, 4, 40, 6, 6, 100, 50, "boss");
 }
 
 function Ogre(x, y, direction = 8) {
-  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 64, 3, 32, 35, 40, "ogre");
+  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 64, 3, 32, 35, 60, "ogre");
 }
 
 function Spectre(x, y, direction = 8) {
-  Enemy.call(this, x, y, 102, 102, 20, 15, direction, 2, 32, 6, 6, 25, 50, "spectre");
+  Enemy.call(this, x, y, 102, 102, 20, 15, direction, 2, 42, 6, 6, 100, 50, "spectre");
 }
 
 function Goblin(x, y, direction = 8) {
-  Enemy.call(this, x, y, 78, 78, 20, 15, direction, 2, 16, 3, 3, 25, 15, "goblin");
+  Enemy.call(this, x, y, 78, 78, 20, 15, direction, 2, 16, 3, 5, 25, 15, "goblin");
 }
 
 function Bat(x, y, direction = 8) {

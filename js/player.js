@@ -1,4 +1,4 @@
-function Player(x, y, ctx) {
+function Player(x, y) {
   // Position => 1: right / 4: up / 7: south / 10: left
   this.width = 96;
   this.height = 96;
@@ -23,7 +23,7 @@ function Player(x, y, ctx) {
   this.weaponItem = new Axe(0, 0, true);
   this.maxHealth = 259;
   this.health = this.maxHealth;
-  this.basicStrength = 10;
+  this.basicStrength = 50;
   this.strength = this.weaponItem.strength + this.basicStrength;
   this.inventar = [];
 
@@ -228,13 +228,13 @@ function Player(x, y, ctx) {
         }
         break;
       case 4:
-        if (this.top <= 0) {
+        if (this.top <= 5) {
           console.log("up border");
           return true;
         }
         break;
       case 7:
-        if (this.bottom >= ctx.canvas.height) {
+        if (this.bottom >= ctx.canvas.height - 40) {
           console.log("down border");
           return true;
         }

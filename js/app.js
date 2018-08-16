@@ -1,7 +1,8 @@
-var debug = true;
+var debug = false;
 var player;
 var ctx;
 var map;
+var content;
 var useSound;
 
 window.onload = function() {
@@ -15,11 +16,14 @@ window.onload = function() {
   console.log(useSound);
 
   document.getElementById("start-button").onclick = function() {
+    document.getElementById("start-button").classList.add("hide");
+    document.getElementById("instructions").classList.add("hide");
     themeSong.loop = true;
     //themeSong.play();
     ctx.clearRect(0, 0, 960, 700);
-    player = new Player(60, 90, ctx);
-    map = new Map(ctx);
+    player = new Player(800, 850);
+    map = new Map();
+    content = new Content();
     console.log("Start InvertvalID: ");
     drawCanvas();
 
@@ -77,25 +81,19 @@ window.onload = function() {
     }
 
     map.draw();
-    map.drawStatusBar();
-    map.goblinQuest();
+    content.goblinQuest();
+    content.helpEvent();
+    content.finalFight();
+    content.rescue();
     map.drawEnemies();
-    map.drawItems();
 
     player.draw();
     map.drawObstacles();
     map.drawNPCs();
-    map.drawTexts();
+    map.drawStatusBar();
+    map.drawItems();
     map.checkIfGameOver();
-
-    var body2 = new Image();
-    body2.src = "img/3/loot.png";
-    ctx.save();
-
-    ctx.scale(-1, 1);
-    ctx.drawImage(body2, -1 * 845, 600, 42, 42);
-    ctx.scale(-1, 1);
-    ctx.drawImage(body2, 800, 700, 42, 42);
+    map.drawTexts();
 
     window.requestAnimationFrame(drawCanvas);
   }

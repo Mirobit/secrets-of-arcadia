@@ -21,7 +21,7 @@ function NPC(x, y, type, text, width = 72, height = 72) {
   // Animation config
   this.talking = false;
   this.talkCounter = 0;
-
+  this.type = type;
   this.avaSteps = 2;
   this.stepInterval = 64;
   this.step = Math.round(Math.random()) * this.stepInterval; // to have different start pic for idle animation
@@ -56,9 +56,9 @@ function NPC(x, y, type, text, width = 72, height = 72) {
     this.step++;
   };
 
-  this.talkTo = function(text = this.text, duration = 4) {
+  this.talkTo = function(text = this.text, duration = 5) {
     this.talking = false;
-    map.texts.push(new TextBox(this.right + 5, this.top + 5, 22, text, 3));
+    map.texts.push(new TextBox(this.right + 5, this.top + 5, 24, text, duration));
     map.texts.push(new TextBar("Someone is talking to you...", duration));
   };
 }
