@@ -46,12 +46,7 @@ function Item(x, y, type, inventar = false) {
         ctx.save();
         ctx.fillStyle = "blue";
         ctx.globalAlpha = 0.2;
-        ctx.fillRect(
-          this.left,
-          this.top,
-          this.right - this.left,
-          this.bottom - this.top
-        );
+        ctx.fillRect(this.left, this.top, this.right - this.left, this.bottom - this.top);
         ctx.restore();
       }
       ctx.drawImage(

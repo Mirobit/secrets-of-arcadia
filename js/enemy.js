@@ -1,41 +1,58 @@
-function Enemy(x, y, type, ctx) {
+function Enemy(
+  x,
+  y,
+  width,
+  height,
+  xOffset,
+  yOffset,
+  direction,
+  avaSteps,
+  stepInterval,
+  avaFightSteps,
+  fightStepInterval,
+  maxHealth,
+  strength,
+  type
+) {
   // Image
   this.body = new Image();
   this.body.src = "img/3/" + type + ".png";
+  console.log(type);
   // Position
   // 1: right
   // 4: up
   // 7: south
   // 10: left
-  this.width = 126;
-  this.height = 126;
+  this.width = width;
+  this.height = height;
   this.x = x;
   this.y = y;
-  this.right = this.x + this.width;
-  this.left = this.x;
-  this.bottom = this.y + this.height;
-  this.top = this.y;
-  this.direction = 8;
+  this.xOffset = xOffset;
+  this.yOffset = yOffset;
+  this.right = this.x + this.width - this.xOffset;
+  this.left = this.x + this.xOffset;
+  this.bottom = this.y + this.height - this.yOffset;
+  this.top = this.y + this.yOffset;
+  this.direction = direction;
   // Animation config
   this.fight = false;
   this.death = false;
 
-  this.step = Math.round(Math.random()) * 4; // to have different start pic for idle animation
-  this.avaSteps = 2;
-  this.stepInterval = 32;
+  this.avaSteps = avaSteps;
+  this.stepInterval = stepInterval;
+  this.step = Math.round(Math.random()) * this.stepInterval; // to have different start pic for idle animation
 
   this.fightStep = 0;
-  this.avaFightSteps = 5;
-  this.fightStepInterval = 5;
+  this.avaFightSteps = avaFightSteps;
+  this.fightStepInterval = fightStepInterval;
 
   this.deathStep = 1;
   this.deathInterval = 0.01;
 
   // character
-  this.maxHealth = 30;
+  this.maxHealth = maxHealth;
   this.health = this.maxHealth;
-  this.strength = 40;
-  this.armor = 10;
+  this.strength = strength;
 
   this.draw = function() {
     if (this.fight) {
@@ -81,7 +98,12 @@ function Enemy(x, y, type, ctx) {
         ctx.save();
         ctx.fillStyle = "black";
         ctx.globalAlpha = 0.2;
-        ctx.fillRect(this.x, this.y, this.width, this.width);
+        ctx.fillRect(this.x, this.y, this.width, this.height);
+        ctx.restore();
+        ctx.save();
+        ctx.fillStyle = "blue";
+        ctx.globalAlpha = 0.2;
+        ctx.fillRect(this.left, this.top, this.right - this.left, this.bottom - this.top);
         ctx.restore();
       }
       if (this.step >= this.stepInterval * this.avaSteps) {
@@ -128,14 +150,11 @@ function Enemy(x, y, type, ctx) {
   };
 
   this.receiveDamage = function(damage) {
-    damage = damage - this.armor;
     this.health -= damage;
     if (this.health <= 0) {
       this.death = true;
       this.fight = false;
-      console.log(
-        "Enemy received damage: " + damage + " Health: " + this.health
-      );
+      console.log("Enemy received damage: " + damage + " Health: " + this.health);
       map.texts.push(new Text(this.x + 30, this.y, "red", "20", "Death!", 4));
       return true;
     }
@@ -156,4 +175,36 @@ function Enemy(x, y, type, ctx) {
       return false;
     }
   };
+}
+
+function DeathKnight(x, y, direction = 8) {
+  Enemy.call(this, x, y, 126, 126, 20, 15, direction, 2, 32, 5, 6, 50, 50, "deathknight");
+}
+
+function Skeleton(x, y, direction = 8) {
+  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 32, 3, 6, 30, 30, "skeleton");
+}
+
+function SkeletonArmor(x, y, direction = 8) {
+  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 32, 3, 6, 25, 30, "skeleton2");
+}
+
+function SkeletonBoss(x, y, direction = 8) {
+  Enemy.call(this, x, y, 192, 192, 20, 15, direction, 4, 16, 6, 6, 50, 50, "boss");
+}
+
+function Ogre(x, y, direction = 8) {
+  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 64, 3, 32, 35, 40, "ogre");
+}
+
+function Spectre(x, y, direction = 8) {
+  Enemy.call(this, x, y, 102, 102, 20, 15, direction, 2, 32, 6, 6, 25, 50, "spectre");
+}
+
+function Goblin(x, y, direction = 8) {
+  Enemy.call(this, x, y, 78, 78, 20, 15, direction, 2, 16, 3, 3, 25, 15, "goblin");
+}
+
+function Eye(x, y, direction = 8) {
+  Enemy.call(this, x, y, 120, 120, 20, 15, direction, 14, 4, 8, 6, 25, 15, "eye");
 }

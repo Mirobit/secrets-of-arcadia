@@ -63,7 +63,6 @@ function Player(x, y, ctx) {
       );
       this.fightStep++;
     } else {
-      console.log;
       if (debug) {
         ctx.save();
         ctx.fillStyle = "black";
@@ -73,12 +72,7 @@ function Player(x, y, ctx) {
         ctx.save();
         ctx.fillStyle = "blue";
         ctx.globalAlpha = 0.2;
-        ctx.fillRect(
-          this.left,
-          this.top,
-          this.right - this.left,
-          this.bottom - this.top
-        );
+        ctx.fillRect(this.left, this.top, this.right - this.left, this.bottom - this.top);
         ctx.restore();
       }
       ctx.drawImage(
@@ -154,33 +148,31 @@ function Player(x, y, ctx) {
 
   this.receiveDamage = function(damage) {
     damage = damage - this.armorItem.defense;
+    if (damage <= 0) {
+      damage = 1;
+    }
     this.health -= damage;
     if (this.health <= 0) {
       this.death = true;
       this.fight = false;
-      console.log(
-        "Player received damage: " + damage + " Health: " + this.health
-      );
-      map.texts.push(
-        new Text(this.x + 25, this.y, "white", "bold 17", "Death!", 4)
-      );
+      console.log("Player received damage: " + damage + " Health: " + this.health);
+      map.texts.push(new Text(this.x + 25, this.y, "white", "bold 17", "Death!", 4));
       return;
     }
-    map.texts.push(
-      new Text(this.x + 25, this.y, "white", "17", "-" + damage, 2)
-    );
+    map.texts.push(new Text(this.x + 25, this.y, "white", "17", "-" + damage, 2));
   };
 
   this.crashWith = function() {
     var obstacles = map.obstacles.concat(map.npcs);
+    // obstacles = map.obstacles.concat(map.enemies); todo need to add offset to enemy
     for (var obst of obstacles) {
       switch (this.direction) {
         case 1:
           if (
-            this.right + this.speed >= obst.left &&
+            this.right + this.speed > obst.left &&
             this.left < obst.right &&
             this.bottom >= obst.top &&
-            this.top <= obst.bottom
+            this.top + this.height / 2 <= obst.bottom
           ) {
             console.log("obstacle hit from left");
             return true;
@@ -191,7 +183,7 @@ function Player(x, y, ctx) {
             this.right >= obst.left &&
             this.left < obst.right &&
             this.bottom >= obst.top &&
-            this.top - this.speed <= obst.bottom
+            this.top - this.speed + this.height / 2 <= obst.bottom
           ) {
             console.log("obstacle hit from bottom");
             return true;
@@ -202,7 +194,7 @@ function Player(x, y, ctx) {
             this.right >= obst.left &&
             this.left < obst.right &&
             this.bottom + this.speed >= obst.top &&
-            this.top <= obst.bottom
+            this.top + this.height / 2 <= obst.bottom
           ) {
             console.log("obstacle hit from top");
             return true;
@@ -210,10 +202,10 @@ function Player(x, y, ctx) {
           break;
         case 10:
           if (
-            this.right >= obst.left &&
+            this.right > obst.left &&
             this.left - this.speed < obst.right &&
             this.bottom >= obst.top &&
-            this.top <= obst.bottom
+            this.top + this.height / 2 <= obst.bottom
           ) {
             console.log("obstacle hit from right");
             return true;
@@ -263,7 +255,7 @@ function Player(x, y, ctx) {
         this.top <= enemy.bottom &&
         !enemy.death
       ) {
-        console.log("player in attack area");
+        console.log("enemy in attack area");
         return enemy;
       }
     }

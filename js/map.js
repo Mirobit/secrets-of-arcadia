@@ -11,48 +11,43 @@ function Map(ctx) {
   this.status.src = "img/3/statusbar.png";
   this.health = new Image();
   this.health.src = "img/3/healthbar.png";
-  this.direction = 7;
+  this.border = new Image();
+  this.border.src = "img/3/border.png";
 
   this.draw = function() {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    ctx.drawImage(this.border, this.x, this.y, this.width, this.height);
   };
   this.drawStatusBar = function() {
     //Statusbar
     ctx.drawImage(
       this.status,
-      0,
-      this.height - this.status.height,
-      this.width,
-      this.status.height
+      10,
+      this.height - this.status.height - 10,
+      this.width - 10,
+      this.status.height - 5
     );
     // Healthbar
     ctx.fillStyle = "red";
-    ctx.fillRect(42, this.height - 36, player.health, 25);
+    ctx.fillRect(42 + 10, this.height - 36 - 10, player.health, 25);
     ctx.drawImage(
       this.health,
-      5,
-      this.height - 42,
+      5 + 10,
+      this.height - 42 - 10,
       this.health.width,
       this.health.height
     );
   };
   this.obstacles = [];
+  this.obstacles.push(new Fire(700, 400));
+  this.obstacles.push(new Tent(700, 200));
 
-  var bigStone = {
-    top: this.tileSize * 2,
-    bottom: this.tileSize * 2.4,
-    left: this.tileSize * 1.5,
-    right: this.tileSize * 2.5,
-    animation: false
+  this.drawObstacles = function() {
+    for (var obst of this.obstacles) {
+      obst.draw();
+    }
   };
-  this.obstacles.push(bigStone);
-  var tent = {
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    animation: false
-  };
+
   this.drawEnemies = function() {
     for (var enemy of this.enemies) {
       enemy.draw();
@@ -60,8 +55,11 @@ function Map(ctx) {
   };
 
   this.enemies = [];
-  this.enemies.push(new Enemy(300, 100, "deathknight", ctx));
-  this.enemies.push(new Enemy(500, 300, "deathknight", ctx));
+  this.enemies.push(new DeathKnight(300, 100));
+  this.enemies.push(new Goblin(500, 300));
+  this.enemies.push(new Ogre(500, 500));
+  this.enemies.push(new Spectre(600, 500));
+  this.enemies.push(new Eye(750, 450));
 
   this.checkAttacks = function() {
     for (var enemy of this.enemies) {

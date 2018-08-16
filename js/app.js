@@ -64,6 +64,7 @@ window.onload = function() {
     map.drawStatusBar();
     map.drawEnemies();
     map.drawItems();
+    map.drawObstacles();
     player.draw();
     map.drawNPCs();
     map.drawTexts();
