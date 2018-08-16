@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Manaspace";
+  src: url("manaspace.ttf");
+}
+
 body {
   padding: 0;
   text-align: center;
@@ -16,6 +21,9 @@ body {
 .logo-img {
   width: 350px;
 }
+audio {
+  display: none;
+}
 
 body button {
   font-size: 30px;
@@ -31,5 +39,4 @@ body button {
 #gamemap {
   float: left;
   padding: 20px 0px;
-  width: 100%;
 }
