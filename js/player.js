@@ -294,10 +294,10 @@ function Player(x, y, ctx) {
   this.checkItem = function() {
     for (var item of map.items) {
       if (
-        this.right >= item.left + item.width / 2 &&
-        this.left < item.right - item.width / 2 &&
-        this.bottom >= item.top + item.height / 2 &&
-        this.top <= item.bottom - item.height / 2
+        this.right >= item.left + item.width / 5 &&
+        this.left < item.right - item.width / 5 &&
+        this.bottom >= item.top + item.height / 5 &&
+        this.top <= item.bottom - item.height / 5
       ) {
         console.log("item picked up");
         this.inventar.push(item);

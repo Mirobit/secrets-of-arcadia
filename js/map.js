@@ -13,6 +13,8 @@ function Map() {
   this.health.src = "img/3/healthbar.png";
   this.border = new Image();
   this.border.src = "img/3/border.png";
+  // Quests
+  this.goblinQuestB = false;
 
   this.draw = function() {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -70,6 +72,7 @@ function Map() {
       case "Skeleton":
       case "skelenton2":
       case "goblin":
+      case "bat":
         item = new HealthPotion(x, y);
         break;
       case "ogre":
@@ -124,13 +127,65 @@ function Map() {
     }
   };
 
+  // Quests/Events
+  this.goblinQuest = function() {
+    if (this.goblinQuestB) {
+      return;
+    } else {
+      if (player.x >= 260) {
+        this.goblinQuestB = true;
+        var goblin = new Goblin(370, 245);
+        this.enemies.push(goblin);
+        goblin.talkTo("Stop! Give me your gold!", 3);
+      } else {
+        return;
+      }
+    }
+  };
+
   // Fill map
-  this.npcs.push(new NPC(400, 200, "villagegirl", "Hello stranger"));
-  this.enemies.push(new DeathKnight(300, 100));
-  this.enemies.push(new Goblin(500, 300));
-  this.enemies.push(new Ogre(500, 500));
-  this.enemies.push(new Spectre(600, 500));
-  this.enemies.push(new Eye(750, 450));
-  this.obstacles.push(new Fire(700, 400));
-  this.obstacles.push(new Tent(700, 200));
+
+  // this.enemies.push(new DeathKnight(300, 100));
+  // this.enemies.push(new Goblin(500, 300));
+  // this.enemies.push(new Ogre(500, 500));
+  // this.enemies.push(new Spectre(600, 500));
+  // this.enemies.push(new Eye(750, 450));
+
+  // camp
+  this.obstacles.push(new Tent(this.width - 130, 20));
+  this.obstacles.push(new Tent(this.width - 245, 20));
+  this.obstacles.push(new Tent(this.width - 135, 320));
+  this.obstacles.push(new Tent(this.width - 265, 320));
+  this.obstacles.push(new Fire(this.width - 320, 120));
+  this.npcs.push(new NPC(this.width - 450, 20, "guard", "The road is closed!"));
+  this.npcs.push(
+    new NPC(
+      this.width - 420,
+      130,
+      "king",
+      "The dark mage and his henchmans took all our coders. We need to get them back!",
+      96,
+      96
+    )
+  );
+  //Forrest
+  //this.enemies.push(new Bat(575, 150));
+  this.obstacles.push(new Tree(100, 200));
+  this.obstacles.push(new Tree(310, -10));
+  this.obstacles.push(new Tree(0, 180));
+  this.obstacles.push(new Tree(200, 270));
+  this.obstacles.push(new Tree(310, 310));
+  this.obstacles.push(new Tree(420, 300));
+  this.obstacles.push(new Tree(520, 270));
+  var villagegirl = new NPC(750, 180, "villagegirl", "We are ruined! They took all our coders!");
+  villagegirl.talkTo("Help!", 4);
+  this.npcs.push(villagegirl);
+
+  // Cave
+  this.obstacles.push(new LavaFall(this.width - 77, this.height - 318));
+  this.obstacles.push(new LavaLanding(this.width - 77, this.height - 180));
+  this.obstacles.push(new LavaBubble1(this.width - 250, this.height - 400));
+  this.obstacles.push(new LavaBubble2(this.width - 100, this.height - 380));
+  this.obstacles.push(new Torch(this.width - 223, this.height - 265));
+  this.obstacles.push(new Torch(this.width - 150, this.height - 265));
 }

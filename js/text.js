@@ -33,7 +33,7 @@ function TextBox(x, y, size, text, duration) {
   this.size = size;
   this.text = text;
   this.step = duration;
-  this.width = (size * this.text.length) / 1.6 + 20;
+  this.width = (size * this.text.length) / 1.5 + 20;
   this.height = size + 20;
   this.fading = 0.1;
   this.avaSteps = 1;

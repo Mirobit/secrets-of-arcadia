@@ -1,4 +1,4 @@
-function NPC(x, y, type, text) {
+function NPC(x, y, type, text, width = 72, height = 72) {
   // Position
   // 1: right
   // 4: up
@@ -8,8 +8,8 @@ function NPC(x, y, type, text) {
   this.body = new Image();
   this.body.src = "img/3/" + type + ".png";
   //position
-  this.width = 72;
-  this.height = 72;
+  this.width = width;
+  this.height = height;
   this.xOffset = 15;
   this.yOffset = 6;
   this.x = x;
@@ -56,9 +56,9 @@ function NPC(x, y, type, text) {
     this.step++;
   };
 
-  this.talkTo = function(text = this.text) {
+  this.talkTo = function(text = this.text, duration = 4) {
     this.talking = false;
-    map.texts.push(new TextBox(this.right + 5, this.top + 5, 17, text, 3));
-    map.texts.push(new TextBar("Someone is talking to you...", 4));
+    map.texts.push(new TextBox(this.right + 5, this.top + 5, 22, text, 3));
+    map.texts.push(new TextBar("Someone is talking to you...", duration));
   };
 }

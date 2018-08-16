@@ -1,4 +1,4 @@
-var debug = false;
+var debug = true;
 var player;
 var ctx;
 var map;
@@ -18,7 +18,7 @@ window.onload = function() {
     themeSong.loop = true;
     //themeSong.play();
     ctx.clearRect(0, 0, 960, 700);
-    player = new Player(0, 0, ctx);
+    player = new Player(60, 90, ctx);
     map = new Map(ctx);
     console.log("Start InvertvalID: ");
     drawCanvas();
@@ -78,13 +78,25 @@ window.onload = function() {
 
     map.draw();
     map.drawStatusBar();
+    map.goblinQuest();
     map.drawEnemies();
     map.drawItems();
-    map.drawObstacles();
+
     player.draw();
+    map.drawObstacles();
     map.drawNPCs();
     map.drawTexts();
     map.checkIfGameOver();
+
+    var body2 = new Image();
+    body2.src = "img/3/loot.png";
+    ctx.save();
+
+    ctx.scale(-1, 1);
+    ctx.drawImage(body2, -1 * 845, 600, 42, 42);
+    ctx.scale(-1, 1);
+    ctx.drawImage(body2, 800, 700, 42, 42);
+
     window.requestAnimationFrame(drawCanvas);
   }
 };

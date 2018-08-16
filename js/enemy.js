@@ -40,6 +40,7 @@ function Enemy(
   // Animation config
   this.fight = false;
   this.death = false;
+  this.talking = false;
 
   this.avaSteps = avaSteps;
   this.stepInterval = stepInterval;
@@ -65,17 +66,36 @@ function Enemy(
         this.fight = false;
         return;
       }
-      ctx.drawImage(
-        this.body,
-        this.width * Math.floor(this.fightStep / this.fightStepInterval),
-        this.height * this.direction,
-        this.width,
-        this.height,
-        this.x,
-        this.y,
-        this.width,
-        this.height
-      );
+      if (this.direction === 10) {
+        console.log("left");
+        ctx.save();
+        ctx.scale(-1, 1);
+        ctx.drawImage(
+          this.body,
+          this.width * Math.floor(this.fightStep / this.fightStepInterval),
+          this.height * 1,
+          this.width,
+          this.height,
+          -(this.x + 45),
+          this.y,
+          this.width,
+          this.height
+        );
+        ctx.restore();
+      } else {
+        ctx.drawImage(
+          this.body,
+          this.width * Math.floor(this.fightStep / this.fightStepInterval),
+          this.height * this.direction,
+          this.width,
+          this.height,
+          this.x,
+          this.y,
+          this.width,
+          this.height
+        );
+      }
+
       this.fightStep++;
     } else if (this.death) {
       if (this.deathStep <= 0) {
@@ -179,6 +199,12 @@ function Enemy(
       return false;
     }
   };
+
+  this.talkTo = function(text, duration) {
+    this.talking = false;
+    map.texts.push(new TextBox(this.right + 5, this.top + 5, 21, text, duration));
+    map.texts.push(new TextBar("Someone is talking to you...", 4));
+  };
 }
 
 function DeathKnight(x, y, direction = 8) {
@@ -207,6 +233,10 @@ function Spectre(x, y, direction = 8) {
 
 function Goblin(x, y, direction = 8) {
   Enemy.call(this, x, y, 78, 78, 20, 15, direction, 2, 16, 3, 3, 25, 15, "goblin");
+}
+
+function Bat(x, y, direction = 8) {
+  Enemy.call(this, x, y, 96, 108, 20, 15, direction, 5, 8, 5, 10, 50, 15, "bat");
 }
 
 function Eye(x, y, direction = 8) {
