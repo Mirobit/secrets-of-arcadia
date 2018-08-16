@@ -17,7 +17,6 @@ function Enemy(
   // Image
   this.body = new Image();
   this.body.src = "img/3/" + type + ".png";
-  console.log(type);
   // Position
   // 1: right
   // 4: up
@@ -29,10 +28,14 @@ function Enemy(
   this.y = y;
   this.xOffset = xOffset;
   this.yOffset = yOffset;
-  this.right = this.x + this.width - this.xOffset;
-  this.left = this.x + this.xOffset;
-  this.bottom = this.y + this.height - this.yOffset;
-  this.top = this.y + this.yOffset;
+  // this.right = this.x + this.width - this.xOffset;
+  // this.left = this.x + this.xOffset;
+  // this.bottom = this.y + this.height - this.yOffset;
+  // this.top = this.y + this.yOffset;
+  this.right = this.x + this.width;
+  this.left = this.x;
+  this.bottom = this.y + this.height;
+  this.top = this.y;
   this.direction = direction;
   // Animation config
   this.fight = false;
@@ -50,6 +53,7 @@ function Enemy(
   this.deathInterval = 0.01;
 
   // character
+  this.type = type;
   this.maxHealth = maxHealth;
   this.health = this.maxHealth;
   this.strength = strength;
@@ -155,10 +159,10 @@ function Enemy(
       this.death = true;
       this.fight = false;
       console.log("Enemy received damage: " + damage + " Health: " + this.health);
-      map.texts.push(new Text(this.x + 30, this.y, "red", "20", "Death!", 4));
+      map.texts.push(new TextBar("You slayed a monster", 15));
       return true;
     }
-    map.texts.push(new Text(this.x + 30, this.y, "red", "17", "-" + damage, 2));
+    map.texts.push(new Text(this.x + 30, this.y, "red", "18", "-" + damage, 2));
     return false;
   };
 

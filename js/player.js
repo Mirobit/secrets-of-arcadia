@@ -17,6 +17,7 @@ function Player(x, y, ctx) {
   this.fightStep = 0;
   this.maxFightStep = 16;
   this.fight = false;
+  this.deaht = false;
   // character
   this.armorItem = new Cloth(0, 0, true);
   this.weaponItem = new Axe(0, 0, true);
@@ -33,7 +34,9 @@ function Player(x, y, ctx) {
   this.weapon.src = "img/3/" + this.weaponItem.type + ".png";
 
   this.draw = function() {
-    if (this.fight) {
+    if (player.death) {
+      ctx.drawImage(this.body, 0, 0, 72, 72, this.x, this.y, 72, 72);
+    } else if (this.fight) {
       if (this.fightStep > this.maxFightStep) {
         this.fightStep = 0;
         this.fight = false;
@@ -144,6 +147,7 @@ function Player(x, y, ctx) {
     if (this.fightStep > 0) {
       this.fightStep = 0;
     }
+    hit2.play();
   };
 
   this.receiveDamage = function(damage) {
@@ -155,11 +159,10 @@ function Player(x, y, ctx) {
     if (this.health <= 0) {
       this.death = true;
       this.fight = false;
-      console.log("Player received damage: " + damage + " Health: " + this.health);
-      map.texts.push(new Text(this.x + 25, this.y, "white", "bold 17", "Death!", 4));
+      map.texts.push(new TextBar("You died are horrible death!", 20));
       return;
     }
-    map.texts.push(new Text(this.x + 25, this.y, "white", "17", "-" + damage, 2));
+    map.texts.push(new Text(this.x + 25, this.y, "white", "18", "-" + damage, 2));
   };
 
   this.crashWith = function() {
@@ -284,6 +287,7 @@ function Player(x, y, ctx) {
     if (target != false) {
       console.log("npc found to talk to");
       target.talkTo();
+      npc.play();
     }
   };
 

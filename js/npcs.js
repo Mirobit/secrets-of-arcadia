@@ -1,4 +1,4 @@
-function NPC(x, y, type) {
+function NPC(x, y, type, text) {
   // Position
   // 1: right
   // 4: up
@@ -27,7 +27,7 @@ function NPC(x, y, type) {
   this.step = Math.round(Math.random()) * this.stepInterval; // to have different start pic for idle animation
 
   // Text
-  this.text = "Hello hello hello hello";
+  this.text = text;
 
   this.draw = function() {
     if (this.step >= this.stepInterval * this.avaSteps) {
@@ -38,12 +38,7 @@ function NPC(x, y, type) {
       ctx.save();
       ctx.fillStyle = "blue";
       ctx.globalAlpha = 0.2;
-      ctx.fillRect(
-        this.left,
-        this.top,
-        this.right - this.left,
-        this.bottom - this.top
-      );
+      ctx.fillRect(this.left, this.top, this.right - this.left, this.bottom - this.top);
       ctx.restore();
     }
     //console.log(this.body);
@@ -61,8 +56,9 @@ function NPC(x, y, type) {
     this.step++;
   };
 
-  this.talkTo = function() {
+  this.talkTo = function(text = this.text) {
     this.talking = false;
-    map.texts.push(new TextBox(this.right + 5, this.top + 5, 17, this.text, 3));
+    map.texts.push(new TextBox(this.right + 5, this.top + 5, 17, text, 3));
+    map.texts.push(new TextBar("Someone is talking to you...", 4));
   };
 }

@@ -28,7 +28,7 @@ function Item(x, y, type, inventar = false) {
         this.width,
         this.height,
         315 + 50 * pos,
-        map.height - 51,
+        map.height - 61,
         this.width,
         this.height
       );
@@ -69,6 +69,7 @@ function HealthPotion(x, y, inventar = false) {
   Item.call(this, x, y, "flask");
   this.points = 20;
   this.use = function() {
+    useSound.play();
     player.health += 20;
     if (player.health > player.maxHealth) {
       player.health = player.health - (player.health - player.maxHealth);
@@ -79,6 +80,7 @@ function HealthPotion(x, y, inventar = false) {
 function SuperPotion(x, y, inventar = false) {
   Item.call(this, x, y, "firepotion");
   this.use = function() {
+    useSound.play();
     player.health = player.maxHealth;
   };
 }
@@ -87,9 +89,12 @@ function Weapon(x, y, type, strength, inventar = false) {
   Item.call(this, x, y, type, inventar);
   this.strength = strength;
   this.use = function() {
+    console.log(this);
     player.inventar.push(player.weaponItem);
     player.weaponItem = this;
+    player.weapon.src = "img/3/" + this.type + ".png";
     player.strength = player.basicStrength + this.strength;
+    console.log(player.weaponItem.type);
   };
 }
 

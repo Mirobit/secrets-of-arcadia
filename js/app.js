@@ -2,11 +2,21 @@ var debug = false;
 var player;
 var ctx;
 var map;
+var useSound;
 
 window.onload = function() {
   ctx = document.getElementById("gamemap").getContext("2d");
+  var themeSong = document.getElementById("themesong");
+  var hit1 = document.getElementById("hit1");
+  var hit2 = document.getElementById("hit2");
+  hit2.volume = 0.5;
+  var npc = document.getElementById("npc");
+  useSound = document.getElementById("useItem");
+  console.log(useSound);
 
   document.getElementById("start-button").onclick = function() {
+    themeSong.loop = true;
+    //themeSong.play();
     ctx.clearRect(0, 0, 960, 700);
     player = new Player(0, 0, ctx);
     map = new Map(ctx);
@@ -14,6 +24,9 @@ window.onload = function() {
     drawCanvas();
 
     document.onkeydown = function(e) {
+      if (player.death) {
+        return;
+      }
       switch (e.keyCode) {
         case 38:
           player.move(4);
@@ -59,7 +72,10 @@ window.onload = function() {
 
   function drawCanvas() {
     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-    map.checkAttacks();
+    if (!player.death) {
+      map.checkAttacks();
+    }
+
     map.draw();
     map.drawStatusBar();
     map.drawEnemies();
@@ -68,6 +84,7 @@ window.onload = function() {
     player.draw();
     map.drawNPCs();
     map.drawTexts();
+    map.checkIfGameOver();
     window.requestAnimationFrame(drawCanvas);
   }
 };

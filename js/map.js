@@ -1,12 +1,12 @@
-function Map(ctx) {
-  this.width = 960;
-  this.height = 700;
+function Map() {
+  this.width = 1620;
+  this.height = 1080;
   this.x = 0;
   this.y = 0;
   this.tileSize = 96;
   //Images
   this.img = new Image();
-  this.img.src = "img/map-small.png";
+  this.img.src = "img/bg1.png";
   this.status = new Image();
   this.status.src = "img/3/statusbar.png";
   this.health = new Image();
@@ -23,24 +23,16 @@ function Map(ctx) {
     ctx.drawImage(
       this.status,
       10,
-      this.height - this.status.height - 10,
-      this.width - 10,
+      this.height - this.status.height - 9,
+      this.width - 20,
       this.status.height - 5
     );
     // Healthbar
     ctx.fillStyle = "red";
-    ctx.fillRect(42 + 10, this.height - 36 - 10, player.health, 25);
-    ctx.drawImage(
-      this.health,
-      5 + 10,
-      this.height - 42 - 10,
-      this.health.width,
-      this.health.height
-    );
+    ctx.fillRect(42 + 9, this.height - 36 - 12, player.health, 25);
+    ctx.drawImage(this.health, 5 + 8, this.height - 42 - 12, this.health.width, this.health.height);
   };
   this.obstacles = [];
-  this.obstacles.push(new Fire(700, 400));
-  this.obstacles.push(new Tent(700, 200));
 
   this.drawObstacles = function() {
     for (var obst of this.obstacles) {
@@ -55,11 +47,6 @@ function Map(ctx) {
   };
 
   this.enemies = [];
-  this.enemies.push(new DeathKnight(300, 100));
-  this.enemies.push(new Goblin(500, 300));
-  this.enemies.push(new Ogre(500, 500));
-  this.enemies.push(new Spectre(600, 500));
-  this.enemies.push(new Eye(750, 450));
 
   this.checkAttacks = function() {
     for (var enemy of this.enemies) {
@@ -68,9 +55,41 @@ function Map(ctx) {
       } else if (enemy.deathStep <= 0) {
         this.enemies.splice(this.enemies.indexOf(enemy), 1);
         console.log("maps: enemy removed from array");
+        this.dropItem(enemy);
       }
     }
   };
+
+  this.dropItem = function(enemy) {
+    var max = 4;
+    var item = "";
+    var randomNum = Math.round(Math.random() * max);
+    var x = enemy.right - (enemy.right - enemy.left) / 1.4;
+    var y = enemy.bottom - (enemy.bottom - enemy.top) / 1.4;
+    switch (enemy.type) {
+      case "Skeleton":
+      case "skelenton2":
+      case "goblin":
+        item = new HealthPotion(x, y);
+        break;
+      case "ogre":
+        item = new Lether(x, y);
+        break;
+      case "deathknight":
+        item = new GoldenSword(x, y);
+        break;
+      case "spectre":
+        item = new SuperPotion(x, y);
+        break;
+      case "boss":
+        item = new GoldenSword(x, y);
+        break;
+      case "eye":
+        item = new BlueSword(x, y);
+    }
+    this.items.push(item);
+  };
+
   this.texts = [];
 
   this.drawTexts = function() {
@@ -80,7 +99,6 @@ function Map(ctx) {
   };
 
   this.npcs = [];
-  this.npcs.push(new NPC(400, 200, "villagegirl"));
 
   this.drawNPCs = function() {
     for (var npc of this.npcs) {
@@ -89,13 +107,30 @@ function Map(ctx) {
   };
 
   this.items = [];
-  this.items.push(new HealthPotion(200, 500));
-  this.items.push(new SuperPotion(300, 510));
-  this.items.push(new Plate(700, 510));
   this.drawItems = function() {
     var items = map.items.concat(player.inventar);
     for (var item of items) {
       item.draw();
     }
   };
+
+  this.checkIfGameOver = function() {
+    if (player.death) {
+      this.texts.push(new Text(this.width - 100, this.height - 100, "red", 40, "Game over", 10));
+      player.body.src = "img/3/lavanpc.png";
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  // Fill map
+  this.npcs.push(new NPC(400, 200, "villagegirl", "Hello stranger"));
+  this.enemies.push(new DeathKnight(300, 100));
+  this.enemies.push(new Goblin(500, 300));
+  this.enemies.push(new Ogre(500, 500));
+  this.enemies.push(new Spectre(600, 500));
+  this.enemies.push(new Eye(750, 450));
+  this.obstacles.push(new Fire(700, 400));
+  this.obstacles.push(new Tent(700, 200));
 }
