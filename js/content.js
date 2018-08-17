@@ -145,7 +145,7 @@ function Content() {
 
   map.enemies.push(new Skeleton(120, 700, 5));
   map.enemies.push(new Skeleton(290, 750));
-  map.enemies.push(new SkeletonArmor(580, 8350));
+  map.enemies.push(new SkeletonArmor(580, 835));
 
   map.objects.push(new Tree(-20, 530));
   map.objects.push(new Tree(-25, 610));
