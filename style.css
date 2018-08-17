@@ -6,37 +6,50 @@
 body {
   padding: 0;
   text-align: center;
+  background-color: #c8c8c8;
 }
 
-.game-intro {
-  float: left;
-  padding: 0% 10%;
-}
-
-.game-intro p {
-  font-size: 18px;
-  font-family: "Verdana";
-}
-
-.logo-img {
-  width: 350px;
-}
 audio {
   display: none;
 }
 
 body button {
-  font-size: 30px;
-  background-color: #870007;
-  color: #fff;
-  padding: 20px 40px;
-  border: 0;
-  box-shadow: 0;
-  border-radius: 5px;
-  margin-bottom: 20px;
+  background-image: url("img/3/play.png");
+  background-color: #c8c8c8;
+  width: 375px;
+  height: 150px;
+  border: none;
+}
+#game {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #gamemap {
-  float: left;
-  padding: 20px 0px;
+  text-align: center;
+}
+
+#instructions {
+  background-image: url("img/3/papersmall.png");
+  text-align: center;
+  width: 632px;
+  height: 269px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Manaspace, serif;
+  font-size: 30px;
+  margin-bottom: 50px;
+}
+
+.hide {
+  display: none !important;
+}
+
+header {
+  font-family: Manaspace;
+  font-size: 50px;
+  margin-bottom: 30px;
+  margin-top: 30px;
 }
