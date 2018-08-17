@@ -66,34 +66,17 @@ function Enemy(
         this.fight = false;
         return;
       }
-      if (this.direction === 10) {
-        ctx.save();
-        ctx.scale(-1, 1);
-        ctx.drawImage(
-          this.body,
-          this.width * Math.floor(this.fightStep / this.fightStepInterval),
-          this.height * 1,
-          this.width,
-          this.height,
-          -(this.x + 45),
-          this.y,
-          this.width,
-          this.height
-        );
-        ctx.restore();
-      } else {
-        ctx.drawImage(
-          this.body,
-          this.width * Math.floor(this.fightStep / this.fightStepInterval),
-          this.height * this.direction,
-          this.width,
-          this.height,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
-      }
+      ctx.drawImage(
+        this.body,
+        this.width * Math.floor(this.fightStep / this.fightStepInterval),
+        this.height * this.direction,
+        this.width,
+        this.height,
+        this.x,
+        this.y,
+        this.width,
+        this.height
+      );
 
       this.fightStep++;
     } else if (this.death) {
@@ -102,32 +85,19 @@ function Enemy(
       }
       ctx.save();
       ctx.globalAlpha = this.deathStep;
-      if (this.direction === 10) {
-        ctx.scale(-1, 1);
-        ctx.drawImage(
-          this.body,
-          this.width * Math.floor(this.fightStep / this.fightStepInterval),
-          this.height * 1,
-          this.width,
-          this.height,
-          -(this.x + 45),
-          this.y,
-          this.width,
-          this.height
-        );
-      } else {
-        ctx.drawImage(
-          this.body,
-          this.width * Math.floor(this.fightStep / this.fightStepInterval),
-          this.height * this.direction,
-          this.width,
-          this.height,
-          this.x,
-          this.y,
-          this.width,
-          this.height
-        );
-      }
+
+      ctx.drawImage(
+        this.body,
+        this.width * Math.floor(this.fightStep / this.fightStepInterval),
+        this.height * this.direction,
+        this.width,
+        this.height,
+        this.x,
+        this.y,
+        this.width,
+        this.height
+      );
+
       ctx.restore();
       this.deathStep -= this.deathInterval;
     } else {
@@ -193,6 +163,7 @@ function Enemy(
       this.fight = false;
       console.log("Enemy received damage: " + damage + " Health: " + this.health);
       map.texts.push(new TextBar("You slayed a monster", 15));
+      kill.play();
       return true;
     }
     map.texts.push(new Text(this.x + 30, this.y, "red", "18", "-" + damage, 2));
@@ -246,10 +217,6 @@ function Spectre(x, y, direction = 8) {
 
 function Goblin(x, y, direction = 8) {
   Enemy.call(this, x, y, 78, 78, 20, 15, direction, 2, 16, 3, 5, 25, 15, "goblin");
-}
-
-function Bat(x, y, direction = 8) {
-  Enemy.call(this, x, y, 96, 108, 20, 15, direction, 5, 8, 5, 10, 50, 15, "bat");
 }
 
 function Eye(x, y, direction = 8) {

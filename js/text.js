@@ -65,11 +65,11 @@ function TextBox(x, y, size, text, duration) {
   };
 }
 
-function TextBar(text, duration) {
-  this.x = 680;
-  this.y = ctx.canvas.height - 27;
+function TextBar(text, duration = 8) {
+  this.x = 850;
+  this.y = ctx.canvas.height - 34;
   this.color = "white";
-  this.size = 18;
+  this.size = 20;
   this.text = text;
   this.step = duration;
   this.fading = 0.1;

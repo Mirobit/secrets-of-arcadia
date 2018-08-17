@@ -315,7 +315,7 @@ function Player(x, y) {
       this.inventar.splice(index, 1);
       item.use();
     } else {
-      console.log("no items in inventar");
+      noItem.play();
     }
   };
 }

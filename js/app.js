@@ -3,7 +3,7 @@ var player;
 var ctx;
 var map;
 var content;
-var useSound;
+var useItem, switchItem, noItem;
 
 window.onload = function() {
   ctx = document.getElementById("gamemap").getContext("2d");
@@ -12,19 +12,22 @@ window.onload = function() {
   var hit2 = document.getElementById("hit2");
   hit2.volume = 0.5;
   var npc = document.getElementById("npc");
-  useSound = document.getElementById("useItem");
-  console.log(useSound);
-
+  useItem = document.getElementById("useItem");
+  switchItem = document.getElementById("switch");
+  noItem = document.getElementById("noitem");
+  var kill = document.getElementById("kill");
+  kill.volume = 0.5;
   document.getElementById("start-button").onclick = function() {
     document.getElementById("start-button").classList.add("hide");
     document.getElementById("instructions").classList.add("hide");
     themeSong.loop = true;
-    //themeSong.play();
+    themeSong.play();
     ctx.clearRect(0, 0, 960, 700);
-    player = new Player(800, 850);
+    player = new Player(70, 60);
+
     map = new Map();
     content = new Content();
-    console.log("Start InvertvalID: ");
+    player.move(8); // Player is otherwise invsivle before first move
     drawCanvas();
 
     document.onkeydown = function(e) {

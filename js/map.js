@@ -22,14 +22,20 @@ function Map() {
     ctx.drawImage(
       this.status,
       10,
-      this.height - this.status.height - 9,
+      this.height - this.status.height - 17,
       this.width - 20,
       this.status.height - 5
     );
     // Healthbar
     ctx.fillStyle = "red";
-    ctx.fillRect(42 + 9, this.height - 36 - 12, player.health, 25);
-    ctx.drawImage(this.health, 5 + 8, this.height - 42 - 12, this.health.width, this.health.height);
+    ctx.fillRect(42 + 12, this.height - 36 - 19, player.health, 25);
+    ctx.drawImage(
+      this.health,
+      5 + 11,
+      this.height - 42 - 19,
+      this.health.width,
+      this.health.height
+    );
     ctx.drawImage(this.border, this.x, this.y, this.width, this.height);
   };
   this.obstacles = [];
@@ -69,16 +75,17 @@ function Map() {
 
     switch (enemy.type) {
       case "skeleton":
-      case "skeleton2":
       case "goblin":
-      case "bat":
         item = new HealthPotion(x, y);
+        break;
+      case "skeleton2":
+        item = new Plate(x, y);
         break;
       case "ogre":
         item = new Lether(x, y);
         break;
       case "deathknight":
-        item = new GoldenSword(x, y);
+        item = new BlueSword(x, y);
         break;
       case "spectre":
         item = new SuperPotion(x, y);

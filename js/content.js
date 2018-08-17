@@ -12,7 +12,7 @@ function Content() {
     } else {
       if (player.x >= 260) {
         this.goblinQuestB = true;
-        var goblin = new Goblin(370, 245);
+        var goblin = new Goblin(370, 245, 11);
         map.enemies.push(goblin);
         goblin.talkTo("Stop! Give me your gold!", 3);
       } else {
@@ -133,12 +133,12 @@ function Content() {
   map.obstacles.push(new Tree(480, 650));
   map.obstacles.push(new Tree(380, 620));
 
-  map.enemies.push(new Skeleton(550, 460));
-  map.enemies.push(new Skeleton(400, 490));
+  map.enemies.push(new Skeleton(550, 460, 2));
+  map.enemies.push(new Skeleton(400, 490, 2));
 
-  map.enemies.push(new SkeletonArmor(120, 700));
-  map.enemies.push(new SkeletonArmor(290, 700));
-  map.enemies.push(new SkeletonBoss(580, 830));
+  map.enemies.push(new Skeleton(120, 700, 5));
+  map.enemies.push(new Skeleton(290, 750));
+  map.enemies.push(new SkeletonArmor(580, 830));
 
   map.obstacles.push(new Tree(-20, 530));
   map.obstacles.push(new Tree(-25, 610));
