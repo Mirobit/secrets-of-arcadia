@@ -11,12 +11,12 @@ function NPC(x, y, type, text, width = 72, height = 72) {
   this.width = width;
   this.height = height;
   this.xOffset = 15;
-  this.yOffset = 6;
+  this.yOffset = 38;
   this.x = x;
   this.y = y;
   this.right = this.x + this.width - this.xOffset;
   this.left = this.x + this.xOffset;
-  this.bottom = this.y + this.height - this.yOffset;
+  this.bottom = this.y + this.height;
   this.top = this.y + this.yOffset;
   // Animation config
   this.talking = false;

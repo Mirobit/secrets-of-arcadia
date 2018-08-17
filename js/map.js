@@ -6,7 +6,7 @@ function Map() {
   this.tileSize = 96;
   //Images
   this.img = new Image();
-  this.img.src = "img/bg1.png";
+  this.img.src = "img/bg22.png";
   this.status = new Image();
   this.status.src = "img/3/statusbar.png";
   this.health = new Image();
@@ -38,7 +38,12 @@ function Map() {
     );
     ctx.drawImage(this.border, this.x, this.y, this.width, this.height);
   };
-  this.obstacles = [];
+
+  this.drawObjects = function() {
+    for (var obst of this.objects) {
+      obst.draw();
+    }
+  };
 
   this.drawObstacles = function() {
     for (var obst of this.obstacles) {
@@ -51,8 +56,6 @@ function Map() {
       enemy.draw();
     }
   };
-
-  this.enemies = [];
 
   this.checkAttacks = function() {
     for (var enemy of this.enemies) {
@@ -102,6 +105,9 @@ function Map() {
   this.texts = [];
   this.npcs = [];
   this.items = [];
+  this.enemies = [];
+  this.obstacles = [];
+  this.objects = [];
 
   this.drawTexts = function() {
     for (var text of this.texts) {

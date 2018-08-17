@@ -67,7 +67,7 @@ function Item(x, y, type, inventar = false) {
 
 function HealthPotion(x, y, inventar = false) {
   Item.call(this, x, y, "flask");
-  this.points = 55;
+  this.points = 45;
   this.use = function() {
     useItem.play();
     player.health += this.points;

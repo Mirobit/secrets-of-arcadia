@@ -10,13 +10,13 @@ window.onload = function() {
   var themeSong = document.getElementById("themesong");
   var hit1 = document.getElementById("hit1");
   var hit2 = document.getElementById("hit2");
-  hit2.volume = 0.5;
+  hit2.volume = 1;
   var npc = document.getElementById("npc");
   useItem = document.getElementById("useItem");
   switchItem = document.getElementById("switch");
   noItem = document.getElementById("noitem");
   var kill = document.getElementById("kill");
-  kill.volume = 0.5;
+  kill.volume = 1;
   document.getElementById("start-button").onclick = function() {
     document.getElementById("start-button").classList.add("hide");
     document.getElementById("instructions").classList.add("hide");
@@ -64,11 +64,6 @@ window.onload = function() {
         case 55: // 7
           player.useItem(e.key - 1);
           break;
-        // case 18:
-        //   if (!enemy.fight) {
-        //     enemy.attack();
-        //   }
-        //   break;
         case 66:
           console.log("Stoppping IntervalID: ", interval);
           stop();
@@ -91,7 +86,7 @@ window.onload = function() {
     map.drawEnemies();
 
     player.draw();
-    map.drawObstacles();
+    map.drawObjects();
     map.drawNPCs();
     map.drawStatusBar();
     map.drawItems();

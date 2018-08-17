@@ -23,7 +23,7 @@ function Player(x, y) {
   this.weaponItem = new Axe(0, 0, true);
   this.maxHealth = 259;
   this.health = this.maxHealth;
-  this.basicStrength = 50;
+  this.basicStrength = 10;
   this.strength = this.weaponItem.strength + this.basicStrength;
   this.inventar = [];
 
@@ -166,9 +166,10 @@ function Player(x, y) {
   };
 
   this.crashWith = function() {
-    var obstacles = map.obstacles.concat(map.npcs);
-    // obstacles = map.obstacles.concat(map.enemies); todo need to add offset to enemy
-    for (var obst of obstacles) {
+    var objects = map.objects.concat(map.npcs);
+    objects = objects.concat(map.obstacles);
+    // objects = map.objects.concat(map.enemies); todo need to add offset to enemy
+    for (var obst of objects) {
       switch (this.direction) {
         case 1:
           if (
