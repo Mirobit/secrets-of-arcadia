@@ -21,7 +21,7 @@ window.onload = function() {
     document.getElementById("start-button").classList.add("hide");
     document.getElementById("instructions").classList.add("hide");
     themeSong.loop = true;
-    themeSong.play();
+    //themeSong.play();
     ctx.clearRect(0, 0, 960, 700);
     player = new Player(70, 60);
 

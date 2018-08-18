@@ -60,12 +60,13 @@ function Enemy(
   this.strength = strength;
 
   this.draw = function() {
+    // neeeds to be checked before if(this.fight) is called
+    if (this.fight && this.fightStep >= this.fightStepInterval * this.avaFightSteps) {
+      this.fightStep = 0;
+      this.fight = false;
+      this.direction = this.direction + 2;
+    }
     if (this.fight) {
-      if (this.fightStep >= this.fightStepInterval * this.avaFightSteps) {
-        this.fightStep = 0;
-        this.fight = false;
-        return;
-      }
       ctx.drawImage(
         this.body,
         this.width * Math.floor(this.fightStep / this.fightStepInterval),
@@ -138,7 +139,7 @@ function Enemy(
     console.log("enemy fight:" + player.direction);
     switch (player.direction) {
       case 1:
-        this.direction = 10;
+        this.direction = 9;
         break;
       case 10:
         this.direction = 0;
@@ -150,9 +151,6 @@ function Enemy(
         this.direction = 3;
         break;
     }
-    if (this.fightStep > 0) {
-      this.fightStep = 0;
-    }
     player.receiveDamage(this.strength);
   };
 
@@ -161,7 +159,6 @@ function Enemy(
     if (this.health <= 0) {
       this.death = true;
       this.fight = false;
-      console.log("Enemy received damage: " + damage + " Health: " + this.health);
       map.texts.push(new TextBar("You slayed a monster", 15));
       kill.play();
       return true;
@@ -192,15 +189,15 @@ function Enemy(
 }
 
 function DeathKnight(x, y, direction = 8) {
-  Enemy.call(this, x, y, 126, 126, 20, 15, direction, 2, 32, 5, 6, 300, 65, "deathknight");
+  Enemy.call(this, x, y, 126, 126, 20, 15, direction, 2, 32, 5, 6, 300, 68, "deathknight");
 }
 
 function Skeleton(x, y, direction = 8) {
-  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 64, 3, 8, 100, 35, "skeleton");
+  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 64, 3, 8, 100, 37, "skeleton");
 }
 
 function SkeletonArmor(x, y, direction = 8) {
-  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 54, 3, 10, 200, 37, "skeleton2");
+  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 54, 3, 10, 200, 40, "skeleton2");
 }
 
 function SkeletonBoss(x, y, direction = 8) {
@@ -208,11 +205,11 @@ function SkeletonBoss(x, y, direction = 8) {
 }
 
 function Ogre(x, y, direction = 8) {
-  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 64, 3, 32, 150, 60, "ogre");
+  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 64, 3, 32, 150, 55, "ogre");
 }
 
 function Spectre(x, y, direction = 8) {
-  Enemy.call(this, x, y, 102, 102, 20, 15, direction, 2, 42, 8, 14, 400, 70, "spectre");
+  Enemy.call(this, x, y, 102, 102, 20, 15, direction, 2, 42, 8, 14, 400, 73, "spectre");
 }
 
 function Goblin(x, y, direction = 8) {
