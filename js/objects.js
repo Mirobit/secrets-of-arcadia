@@ -68,22 +68,17 @@ function Fire(x, y) {
 function Tree(x, y) {
   MapObject.call(this, x, y, 181, 252, 45, 45, 200, 20, 1, 0.9, "tree");
 }
-function Tree(x, y) {
-  MapObject.call(this, x, y, 181, 252, 45, 45, 200, 0, 1, 0.9, "tree");
-}
+
 function DeathTree1(x, y) {
   MapObject.call(this, x, y, 132, 198, 22, 22, 150, 0, 1, 0.9, "deathtree1");
 }
+
 function DeathTree2(x, y) {
   MapObject.call(this, x, y, 140, 211, 35, 35, 160, 0, 1, 0.9, "deathtree2");
 }
 
 function Tent(x, y) {
-  MapObject.call(this, x, y, 109, 147, 0, 0, 0, 100, 1, 0.9, "tent");
-}
-
-function Tent(x, y) {
-  MapObject.call(this, x, y, 109, 147, 0, 0, 0, 0, 1, 0.9, "tent");
+  MapObject.call(this, x, y, 109, 147, 0, 0, 47, 0, 1, 0.9, "tent");
 }
 
 function LavaFall(x, y) {

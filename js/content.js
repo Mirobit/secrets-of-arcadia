@@ -87,7 +87,7 @@ function Content() {
   map.obstacles.push(new Obstacle(0, 0, 570, 100));
   map.obstacles.push(new Obstacle(700, 0, 150, 100));
   map.obstacles.push(new Obstacle(660, 300, 220, 170));
-  map.obstacles.push(new Obstacle(735, 550, 60, 370));
+  map.obstacles.push(new Obstacle(735, 555, 55, 370));
   map.obstacles.push(new Obstacle(1260, 590, 360, 280));
   // camp
   map.objects.push(new Tent(map.width - 130, 25));

@@ -196,11 +196,11 @@ function DeathKnight(x, y, direction = 8) {
 }
 
 function Skeleton(x, y, direction = 8) {
-  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 64, 3, 6, 100, 35, "skeleton");
+  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 64, 3, 8, 100, 35, "skeleton");
 }
 
 function SkeletonArmor(x, y, direction = 8) {
-  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 54, 3, 6, 200, 37, "skeleton2");
+  Enemy.call(this, x, y, 144, 144, 20, 15, direction, 2, 54, 3, 10, 200, 37, "skeleton2");
 }
 
 function SkeletonBoss(x, y, direction = 8) {
@@ -212,7 +212,7 @@ function Ogre(x, y, direction = 8) {
 }
 
 function Spectre(x, y, direction = 8) {
-  Enemy.call(this, x, y, 102, 102, 20, 15, direction, 2, 42, 6, 14, 400, 70, "spectre");
+  Enemy.call(this, x, y, 102, 102, 20, 15, direction, 2, 42, 8, 14, 400, 70, "spectre");
 }
 
 function Goblin(x, y, direction = 8) {
