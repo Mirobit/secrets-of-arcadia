@@ -63,7 +63,6 @@ function Map() {
         enemy.attack();
       } else if (enemy.deathStep <= 0) {
         this.enemies.splice(this.enemies.indexOf(enemy), 1);
-        console.log("maps: enemy removed from array");
         this.dropItem(enemy);
       }
     }

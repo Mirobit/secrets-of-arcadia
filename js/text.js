@@ -29,13 +29,11 @@ function Text(x, y, color, size, text, duration, background) {
 function TextBox(x, y, size, text, duration) {
   this.x = x;
   this.y = y;
-  //this.color = color;
   this.size = size;
   this.text = text;
   this.step = duration;
   this.width = (size * this.text.length) / 1.5 + 20;
   if (this.width + this.x > map.width) {
-    console.log("bigger");
     this.x = this.x - this.width - 45;
   }
   this.height = size + 20;
@@ -75,9 +73,6 @@ function TextBar(text, duration = 8) {
   this.fading = 0.1;
   this.avaSteps = 1;
   this.stepInterval = 8;
-  // Image
-  // this.body = new Image();
-  // this.body.src = "img/3/" + type + ".png";
 
   this.draw = function() {
     if (this.step <= 0) {

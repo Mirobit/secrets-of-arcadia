@@ -41,7 +41,6 @@ function NPC(x, y, type, text, width = 72, height = 72) {
       ctx.fillRect(this.left, this.top, this.right - this.left, this.bottom - this.top);
       ctx.restore();
     }
-    //console.log(this.body);
     ctx.drawImage(
       this.body,
       this.width * Math.floor(this.step / this.stepInterval),

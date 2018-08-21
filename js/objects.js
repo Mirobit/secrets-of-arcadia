@@ -32,7 +32,7 @@ function MapObject(
   // Animation config
   this.avaSteps = avaSteps;
   this.stepInterval = stepInterval;
-  this.step = 0; // to have different start pic for idle animation
+  this.step = Math.round(Math.random()) * this.stepInterval; // to have different start pic for idle animation
 
   this.draw = function() {
     if (this.step >= this.stepInterval * this.avaSteps) {

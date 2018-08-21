@@ -136,7 +136,6 @@ function Enemy(
       return;
     }
     this.fight = true;
-    console.log("enemy fight:" + player.direction);
     switch (player.direction) {
       case 1:
         this.direction = 9;

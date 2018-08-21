@@ -140,7 +140,6 @@ function Player(x, y) {
   this.attack = function(enemies) {
     var target = this.checkRange(enemies);
     if (target != false) {
-      console.log("player found enemy to attack");
       target.receiveDamage(this.strength);
     }
     this.fight = true;
@@ -178,7 +177,6 @@ function Player(x, y) {
             this.bottom >= obst.top &&
             this.top + this.height / 2 <= obst.bottom
           ) {
-            console.log("obstacle hit from left");
             return true;
           }
           break;
@@ -189,7 +187,6 @@ function Player(x, y) {
             this.bottom >= obst.top &&
             this.top - this.speed + this.height / 2 <= obst.bottom
           ) {
-            console.log("obstacle hit from bottom");
             return true;
           }
           break;
@@ -200,7 +197,6 @@ function Player(x, y) {
             this.bottom + this.speed >= obst.top &&
             this.top + this.height / 2 <= obst.bottom
           ) {
-            console.log("obstacle hit from top");
             return true;
           }
           break;
@@ -211,7 +207,6 @@ function Player(x, y) {
             this.bottom >= obst.top &&
             this.top + this.height / 2 <= obst.bottom
           ) {
-            console.log("obstacle hit from right");
             return true;
           }
           break;
@@ -224,25 +219,21 @@ function Player(x, y) {
     switch (this.direction) {
       case 1:
         if (this.right >= ctx.canvas.width) {
-          console.log("right border");
           return true;
         }
         break;
       case 4:
         if (this.top <= 5) {
-          console.log("up border");
           return true;
         }
         break;
       case 7:
         if (this.bottom >= ctx.canvas.height - 40) {
-          console.log("down border");
           return true;
         }
         break;
       case 10:
         if (this.left <= 0) {
-          console.log("left border");
           return true;
         }
         break;
@@ -259,7 +250,6 @@ function Player(x, y) {
         this.top <= enemy.bottom &&
         !enemy.death
       ) {
-        console.log("enemy in attack area");
         return enemy;
       }
     }
@@ -276,7 +266,6 @@ function Player(x, y) {
         this.y <= npc.bottom &&
         !npc.talking
       ) {
-        console.log("npc in talk area");
         return npc;
       }
     }
@@ -286,7 +275,6 @@ function Player(x, y) {
   this.talk = function() {
     var target = this.checkRangeTalk();
     if (target != false) {
-      console.log("npc found to talk to");
       target.talkTo();
       npc.play();
     }
@@ -300,7 +288,6 @@ function Player(x, y) {
         this.bottom >= item.top + item.height / 5 &&
         this.top <= item.bottom - item.height / 5
       ) {
-        console.log("item picked up");
         this.inventar.push(item);
         map.items.splice(map.items.indexOf(item), 1);
         item.inventar = true;
@@ -309,8 +296,6 @@ function Player(x, y) {
     return false;
   };
   this.useItem = function(index) {
-    console.log("index ", index);
-    console.log(this.inventar);
     if (this.inventar[index] !== void 0) {
       var item = this.inventar[index];
       this.inventar.splice(index, 1);
