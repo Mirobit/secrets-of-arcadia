@@ -40,7 +40,6 @@ function Player(x, y) {
       if (this.fightStep > this.maxFightStep) {
         this.fightStep = 0;
         this.fight = false;
-        return;
       }
       ctx.drawImage(
         this.body,
