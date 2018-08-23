@@ -1,0 +1,55 @@
+@font-face {
+  font-family: "Manaspace";
+  src: url("manaspace.ttf");
+}
+
+body {
+  padding: 0;
+  text-align: center;
+  background-color: #c8c8c8;
+}
+
+audio {
+  display: none;
+}
+
+body button {
+  background-image: url("..//img/3/play.png");
+  background-color: #c8c8c8;
+  width: 375px;
+  height: 150px;
+  border: none;
+}
+#game {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#gamemap {
+  text-align: center;
+}
+
+#instructions {
+  background-image: url("..//img/3/papersmall.png");
+  text-align: center;
+  width: 632px;
+  height: 269px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Manaspace, serif;
+  font-size: 30px;
+  margin-bottom: 50px;
+}
+
+.hide {
+  display: none !important;
+}
+
+header {
+  font-family: Manaspace;
+  font-size: 50px;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}

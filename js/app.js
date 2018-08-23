@@ -17,7 +17,18 @@ window.onload = function() {
   noItem = document.getElementById("noitem");
   var kill = document.getElementById("kill");
   kill.volume = 1;
+  let music = true;
+
   document.getElementById("start-button").onclick = function() {
+    // document.getElementById("music").onclick = function() {
+    //   if (music) {
+    //     themeSong.pause();
+    //     music = false;
+    //   } else {
+    //     themeSong.play();
+    //     music = true;
+    //   }
+    // };
     document.getElementById("start-button").classList.add("hide");
     document.getElementById("instructions").classList.add("hide");
     themeSong.loop = true;

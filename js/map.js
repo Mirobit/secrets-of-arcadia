@@ -6,7 +6,7 @@ function Map() {
   this.tileSize = 96;
   //Images
   this.img = new Image();
-  this.img.src = "img/bg22.png";
+  this.img.src = "img/background.png";
   this.status = new Image();
   this.status.src = "img/3/statusbar.png";
   this.health = new Image();
